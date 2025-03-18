@@ -11,18 +11,27 @@ window.onscroll = () => {
         let id = sec.getAttribute('id');
 
         if (top >= offset && top < offset + height) {
-            navLinks.forEach(links => {
-                links.classList.remove('active');
-                document.querySelector('header nav a [href*=' + id + ' ]').classList.add('active')
-            })
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                let currentLink = document.querySelector('header nav a[href*="' + id + '"]');
+                if (currentLink) {
+                    currentLink.classList.add('active');
+                }
+            });
         }
-    })
-}
+    });
+};
 
-
-
-
+// Mobile menu toggle
 menuIcon.onclick = () => {
     menuIcon.classList.toggle('bx-x');
     navbar.classList.toggle('active');
-}
+};
+
+// Close menu when clicking a nav link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        menuIcon.classList.remove('bx-x');
+        navbar.classList.remove('active');
+    });
+});
